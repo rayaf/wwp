@@ -1,0 +1,12 @@
+p#notice = notice
+
+p
+  strong Seguidor:
+  = @relacionamento.seguidor
+p
+  strong Seguido:
+  = @relacionamento.seguido
+
+=> link_to 'Edit', edit_relacionamento_path(@relacionamento)
+'|
+=< link_to 'Back', relacionamentos_path

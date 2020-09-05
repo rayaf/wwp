@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_05_031855) do
+ActiveRecord::Schema.define(version: 2020_09_05_170410) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "relacionamentos", force: :cascade do |t|
+    t.bigint "seguidor_id"
+    t.bigint "seguido_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["seguido_id"], name: "index_relacionamentos_on_seguido_id"
+    t.index ["seguidor_id"], name: "index_relacionamentos_on_seguidor_id"
+  end
 
   create_table "tag_tweets", force: :cascade do |t|
     t.bigint "tweet_id", null: false
@@ -54,6 +63,8 @@ ActiveRecord::Schema.define(version: 2020_09_05_031855) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "relacionamentos", "users", column: "seguido_id"
+  add_foreign_key "relacionamentos", "users", column: "seguidor_id"
   add_foreign_key "tag_tweets", "tags"
   add_foreign_key "tag_tweets", "tweets"
   add_foreign_key "tweets", "users"
