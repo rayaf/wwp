@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
+  resources :tags, only: [:index]
+  get 'tags/:texto', to: 'tags#show'
+  resources :tweets
+
   devise_for :users
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  
+
+  root to: 'tweets#index'
+
 end
