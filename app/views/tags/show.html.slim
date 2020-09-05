@@ -1,0 +1,9 @@
+p#notice = notice
+
+p
+  strong Texto:
+  = @tag.texto
+-@tag.tweets.each do |tweet|
+  p
+    strong Tweet:
+    = tweet.texto
