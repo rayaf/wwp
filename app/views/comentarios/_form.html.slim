@@ -1,0 +1,14 @@
+= form_for  @comentario, url: tweet_comentarios_path(), method: :post  do |f|
+  - if @comentario.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@comentario.errors.count, "error")} prohibited this comentario from being saved:"
+      ul
+        - @comentario.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :texto
+    = f.text_field :texto
+    = f.hidden_field :tweet_id, :value => params[:tweet_id]
+
+  .actions = f.submit

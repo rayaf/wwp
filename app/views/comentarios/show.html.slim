@@ -1,0 +1,15 @@
+p#notice = notice
+
+p
+  strong Comentario:
+  = @comentario.comentario
+p
+  strong Tweet:
+  = @comentario.tweet
+p
+  strong User:
+  = @comentario.user
+
+=> link_to 'Edit', edit_comentario_path(@comentario)
+'|
+=< link_to 'Back', comentarios_path

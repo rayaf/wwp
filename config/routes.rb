@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get 'tags/:texto', to: 'tags#show'
   resources :tweets, except: [:edit, :update] do
     resources :likes, only: [:create, :destroy]
+    resources :comentarios, except: [:index]
   end
 
   devise_for :users, controllers: {
