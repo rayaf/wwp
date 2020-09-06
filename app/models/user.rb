@@ -12,6 +12,8 @@ class User < ApplicationRecord
   has_many :seguido_relacionamentos, class_name: 'Relacionamento', foreign_key: :seguidor_id
   has_many :seguidos, through: :seguido_relacionamentos
 
+  has_many :likes, dependent: :destroy
+
   validates :telefone, :email, :username, uniqueness: true
   validates :nome, :data_de_nascimento, :email, :telefone, presence: true
 
