@@ -29,6 +29,7 @@ class TweetsController < ApplicationController
   end
 
   def show
+    @comentarios = Comentario.where(tweet_id: @tweet.id)
   end
 
   # PATCH/PUT /tweets/1

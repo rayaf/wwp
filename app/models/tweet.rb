@@ -4,6 +4,7 @@ class Tweet < ApplicationRecord
   has_many :tags, through: :tag_tweets
 
   has_many :likes, dependent: :destroy
+  has_many :comentarios, dependent: :destroy
 
   belongs_to :user
 

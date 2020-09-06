@@ -9,6 +9,15 @@ p
 p
   strong User:
   = @tweet.user.email
+p
+  = link_to 'New Comentario', new_tweet_comentario_path(tweet_id: @tweet.id)
+div
+ -unless @comentarios.empty?
+   - @comentarios.each do |comentario|
+     div
+       p = comentario.texto
+       p = link_to 'Edit', edit_tweet_comentario_path(id: comentario.id, tweet_id: @tweet.id)
+       p = link_to 'Destroy', tweet_comentario_path(id: comentario.id, tweet_id: @tweet.id), data: {confirm: 'Are you sure?'}, method: :delete
 
 - pre_like = @tweet.likes.find { |like| like.user_id == current_user.id}
 - if pre_like
