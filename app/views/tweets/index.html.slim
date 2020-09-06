@@ -7,7 +7,6 @@ table
       th User
       th
       th
-      th
 
   tbody
     - @tweets.each do |tweet|
@@ -15,7 +14,6 @@ table
         td = tweet.texto
         td = tweet.user
         td = link_to 'Show', tweet
-        td = link_to 'Edit', edit_tweet_path(tweet)
         td = link_to 'Destroy', tweet, data: { confirm: 'Are you sure?' }, method: :delete
 
 br

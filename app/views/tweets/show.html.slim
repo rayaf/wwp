@@ -1,13 +1,19 @@
 p#notice = notice
 
 p
+  strong id:
+  = @tweet.id
+p
   strong Texto:
   = tweet_com_tags @tweet.texto
 p
   strong User:
   = @tweet.user.email
 
+- pre_like = @tweet.likes.find { |like| like.user_id == current_user.id}
+- if pre_like
+  = button_to 'Unlike', tweet_like_path(@tweet, pre_like), method: :delete
+- else
+  = button_to 'Like', tweet_likes_path(@tweet), method: :post
 
-=> link_to 'Edit', edit_tweet_path(@tweet)
-'|
 =< link_to 'Back', tweets_path
