@@ -3,6 +3,8 @@ class Tweet < ApplicationRecord
   has_many :tag_tweets, dependent: :destroy
   has_many :tags, through: :tag_tweets
 
+  has_many :likes, dependent: :destroy
+
   belongs_to :user
 
   validates_presence_of :texto
