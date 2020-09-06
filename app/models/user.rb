@@ -13,6 +13,7 @@ class User < ApplicationRecord
   has_many :seguidos, through: :seguido_relacionamentos
 
   has_many :likes, dependent: :destroy
+  has_many :comentarios, dependent: :destroy
 
   validates :telefone, :email, :username, uniqueness: true
   validates :nome, :data_de_nascimento, :email, :telefone, presence: true
