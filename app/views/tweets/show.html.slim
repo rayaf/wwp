@@ -1,28 +1,30 @@
 p#notice = notice
-
+p =< link_to 'Back', tweets_path
+strong= "@#{@tweet.user.nome_ou_usuario}"
 p
-  strong id:
-  = @tweet.id
-p
-  strong Texto:
-  = tweet_com_tags @tweet.texto
-p
-  strong User:
-  = @tweet.user.email
-p
-  = link_to 'New Comentario', new_tweet_comentario_path(tweet_id: @tweet.id)
-div
- -unless @comentarios.empty?
-   - @comentarios.each do |comentario|
-     div
-       p = comentario.texto
-       p = link_to 'Edit', edit_tweet_comentario_path(id: comentario.id, tweet_id: @tweet.id)
-       p = link_to 'Destroy', tweet_comentario_path(id: comentario.id, tweet_id: @tweet.id), data: {confirm: 'Are you sure?'}, method: :delete
+  strong   = tweet_com_tags @tweet.texto
 
 - pre_like = @tweet.likes.find { |like| like.user_id == current_user.id}
 - if pre_like
-  = button_to 'Unlike', tweet_like_path(@tweet, pre_like), method: :delete
+  = link_to tweet_like_path(@tweet, pre_like), method: :delete do
+    i.fas.fa-heart
 - else
-  = button_to 'Like', tweet_likes_path(@tweet), method: :post
+  = link_to tweet_likes_path(@tweet), method: :post do
+    i.far.fa-heart
 
-=< link_to 'Back', tweets_path
+
+p
+  = link_to 'Novo Comentrario', new_tweet_comentario_path(tweet_id: @tweet.id)
+div
+ -unless @comentarios.empty?
+   - @comentarios.each do |comentario|
+     .card
+       .card-body
+         p = comentario.texto
+         - if user_signed_in? && current_user.id == @tweet.user_id
+           p
+             = link_to  tweet_comentario_path(id: comentario.id, tweet_id: @tweet.id), data: {confirm: 'Tem certeza?'}, method: :delete do
+               span.icon
+                 i.fas.fa-trash-alt aria-hidden="true"
+
+

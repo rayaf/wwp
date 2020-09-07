@@ -1,0 +1,18 @@
+doctype html
+html
+  head
+    meta content=("text/html; charset=UTF-8") http-equiv="Content-Type" /
+    title WwpTwiter
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+  body
+    nav.navbar.navbar-expand-md.navbar-light.bg-tweet.justify-content-start
+      =link_to 'WWWP-Tweet',  root_path , class: 'navbar-brand'
+      - if user_signed_in?
+        .mr-sm-2
+          = link_to destroy_user_session_path, method: :delete do
+            i.fas.fa-sign-out-alt
+    .container
+      = yield

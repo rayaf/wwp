@@ -11,12 +11,12 @@ class RelacionamentosController < ApplicationController
   def create
     usuario = User.find(params[:seguido_id])
     current_user.seguir(usuario)
-    redirect_to relacionamentos_path
+    redirect_to root_path
   end
 
   def destroy
     current_user.deixar_de_seguir(params[:id])
-    redirect_to relacionamentos_path
+    redirect_to root_path
   end
 
 end

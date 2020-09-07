@@ -1,21 +1,35 @@
-h1 Listing tweets
-
-table
-  thead
-    tr
-      th Texto
-      th User
-      th
-      th
-
-  tbody
-    - @tweets.each do |tweet|
-      tr
-        td = tweet.texto
-        td = tweet.user
-        td = link_to 'Show', tweet
-        td = link_to 'Destroy', tweet, data: { confirm: 'Are you sure?' }, method: :delete
-
 br
+br
+.row
+  .col-2
+    h3 trending
+    - @tags.each do |tag|
+      p
+        = tags_com_link tag.texto
+  .col-6
+    == render 'form', tweet: @tweet
+    br
+    - @tweets.each do |tweet|
+      .card
+        .card-header
+          strong= "@#{tweet.user.nome_ou_usuario}"
 
-= link_to 'New Tweet', new_tweet_path
+        .card-body
+          = tweet_com_tags tweet.texto
+
+          div
+            - if user_signed_in? && current_user.id == tweet.user_id
+              = link_to tweet, class: "level-item" do
+                span.icon
+                  i.fa.fa-eye aria-hidden="true"
+              = link_to tweet, method: :delete, data: {confirm: "Tem certeza que deseja deletar tweeet?"} do
+                span.icon
+                  i.fas.fa-trash-alt aria-hidden="true"
+      br
+
+  .col
+    h3 Usuarios
+    - @usuarios.each do |usuario|
+      p
+        = link_to "@#{usuario.nome_ou_usuario}", relacionamento_path(usuario)
+

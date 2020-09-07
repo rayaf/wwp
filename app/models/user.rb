@@ -36,4 +36,12 @@ class User < ApplicationRecord
     Tweet.where("user_id IN (#{seguidores_ids}) OR user_id = :user_id", user_id: id)
   end
 
+  def nome_ou_usuario
+    if self.username.nil?
+      nome
+    else
+      username
+    end
+  end
+
 end

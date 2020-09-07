@@ -1,12 +1,17 @@
 p#notice = notice
 
-p
-  strong Seguidor:
-  = @relacionamento.seguidor
-p
-  strong Seguido:
-  = @relacionamento.seguido
+h3 = "@#{@user.nome_ou_usuario}"
+- unless current_user == @user
+  /! seguir
+  - unless current_user.seguindo?(@user)
+    p
+      = @user.username
+    = form_for(current_user.seguidor_relacionamentos.build) do |f|
+      div= hidden_field_tag :seguido_id, @user.id
+      = f.submit "Seguir", class: "btn btn-primary my-button"
+  /! deixar de seguir
+  = link_to 'Deixar de Seguir', relacionamento_path(@user), method: :delete, class: "btn btn-danger" if current_user.seguindo?(@user)
 
-=> link_to 'Edit', edit_relacionamento_path(@relacionamento)
-'|
-=< link_to 'Back', relacionamentos_path
+- if current_user == @user && !@user.seguidors.empty?
+  - @user.seguidors.each do |seguidor|
+    = link_to "@#{seguidor.nome_ou_usuario}", relacionamento_path(seguidor)

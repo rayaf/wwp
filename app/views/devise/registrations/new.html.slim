@@ -1,39 +1,40 @@
-h2 Sign up
+br
+.row
+  .col-md-6.offset-md-3
+    h2 Criar sua conta
 
-= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-  = render "devise/shared/error_messages", resource: resource
-  .field
-    = f.label :nome
-    = f.text_field :nome
+    = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+      = render "devise/shared/error_messages", resource: resource
+      .form-group
+        = f.label :nome
+        = f.text_field :nome, class: "form-control"
 
-  .field
-    = f.label :email
-    = f.email_field :email, autofocus: true, autocomplete: "email"
+      .form-group
+        = f.label :email
+        = f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control"
 
-  .field
-    = f.label :telefone
-    = f.text_field :telefone
+      .form-group
+        = f.label :telefone
+        = f.text_field :telefone, class: "form-control"
 
-  .field
-    = f.label :username, "Nome de usuario"
-    = f.text_field :username
+      .form-group
+        = f.label :username, "Nome de usuario"
+        = f.text_field :username, class: "form-control"
 
-  .field
-    = f.label :data_de_nascimento
-    = f.date_field :data_de_nascimento
+      .form-group
+        = f.label :data_de_nascimento
+        = f.date_field :data_de_nascimento, class: "form-control"
 
-  .field
-    = f.label :password, "Senha"
-    - if @minimum_password_length
-    em
-    | (#{@minimum_password_length} characters minimum)
+      .form-group
+        = f.label :password, "Senha"
+        - if @minimum_password_length
+        em
+        | (#{@minimum_password_length} characters minimum)
 
-    = f.password_field :password, autocomplete: "new-password"
-  .field
-    = f.label :password_confirmation, "Confirmar Senha"
+        = f.password_field :password, autocomplete: "new-password", class: "form-control"
+      .form-group
+        = f.label :password_confirmation, "Confirmar Senha"
 
-    = f.password_field :password_confirmation, autocomplete: "new-password"
-  .actions
-    = f.submit "Sign up"
-
-= render "devise/shared/links"
+        = f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control"
+      .actions
+        = f.submit "Criar", class: "btn btn-primary"
